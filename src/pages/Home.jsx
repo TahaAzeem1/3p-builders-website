@@ -257,9 +257,6 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/90 transition-all duration-300" />
                 <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 text-center">
-                  <p className="text-accent text-sm font-inter font-semibold tracking-widest uppercase mb-2">
-                    {item.count}
-                  </p>
                   <h3 className="font-playfair text-4xl md:text-5xl text-white font-bold mb-6">
                     {item.label}
                   </h3>
