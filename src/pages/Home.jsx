@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Home as HomeIcon, Hammer, PlusSquare, ClipboardList, CheckCircle, ChevronDown, ArrowRight, Star } from 'lucide-react';
 
-import heroImg from '../assets/projects/new-construction/meldon/FCS_82MeldonSt_Print-7095.jpg';
-import newConstImg from '../assets/projects/new-construction/two-story-oak/IMG_1476.jpg';
-import renvImg from '../assets/projects/renovation/turman/after_2.jpg';
+import heroImg from '../assets/projects/new-construction/meldon/after_1.jpg';
+import newConstImg from '../assets/projects/new-construction/meldon/new_construction_card.jpg';
+import renvImg from '../assets/projects/renovation/turman/renovation_card.jpg';
 import CTABanner from '../components/CTABanner';
 
 const services = [

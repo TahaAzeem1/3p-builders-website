@@ -6,6 +6,30 @@ import ProjectCarousel from '../components/ProjectCarousel';
 import CTABanner from '../components/CTABanner';
 import { newConstructionProjects } from '../data/projectImages';
 
+// before_ photos first, then after_ photos, numeric order within each group
+const sortPhotos = (photos) => {
+  return [...photos].sort((a, b) => {
+    const getName = (p) => {
+      if (typeof p === 'string') return p.split('/').pop().toLowerCase();
+      if (p && p.src) return p.src.split('/').pop().toLowerCase();
+      if (p && p.default) return p.default.split('/').pop().toLowerCase();
+      return String(p).toLowerCase();
+    };
+    const nameA = getName(a);
+    const nameB = getName(b);
+    const aIsBefore = nameA.includes('before');
+    const bIsBefore = nameB.includes('before');
+    if (aIsBefore && !bIsBefore) return -1;
+    if (!aIsBefore && bIsBefore) return 1;
+    return nameA.localeCompare(nameB, undefined, { numeric: true });
+  });
+};
+
+const sortedProjects = newConstructionProjects.map(project => ({
+  ...project,
+  images: sortPhotos(project.images),
+}));
+
 export default function NewConstruction() {
   return (
     <>
@@ -39,9 +63,9 @@ export default function NewConstruction() {
         </div>
       </section>
 
-      {/* Project carousels */}
+      {/* Project carousels — before photos first, then after */}
       <div className="bg-brand-bg dark:bg-brand-dark-bg">
-        {newConstructionProjects.map((project, i) => (
+        {sortedProjects.map((project, i) => (
           <ProjectCarousel key={project.id} project={project} index={i} />
         ))}
       </div>

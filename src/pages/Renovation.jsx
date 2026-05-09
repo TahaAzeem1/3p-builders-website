@@ -6,8 +6,8 @@ import ProjectCarousel from '../components/ProjectCarousel';
 import CTABanner from '../components/CTABanner';
 import { renovationProjects } from '../data/projectImages';
 
-// Custom sort: numbered prefix (01_) first → before_ → after_ → alphabetical within each group
-const sortRenovationPhotos = (photos) => {
+// before_ photos first, then after_ photos, numeric order within each group
+const sortPhotos = (photos) => {
   return [...photos].sort((a, b) => {
     const getName = (p) => {
       if (typeof p === 'string') return p.split('/').pop().toLowerCase();
@@ -15,27 +15,19 @@ const sortRenovationPhotos = (photos) => {
       if (p && p.default) return p.default.split('/').pop().toLowerCase();
       return String(p).toLowerCase();
     };
-
     const nameA = getName(a);
     const nameB = getName(b);
-
-    const aStartsWithNumber = /^\d+_/.test(nameA);
-    const bStartsWithNumber = /^\d+_/.test(nameB);
-    if (aStartsWithNumber && !bStartsWithNumber) return -1;
-    if (!aStartsWithNumber && bStartsWithNumber) return 1;
-
     const aIsBefore = nameA.includes('before');
     const bIsBefore = nameB.includes('before');
     if (aIsBefore && !bIsBefore) return -1;
     if (!aIsBefore && bIsBefore) return 1;
-
     return nameA.localeCompare(nameB, undefined, { numeric: true });
   });
 };
 
-const sortedRenovationProjects = renovationProjects.map(project => ({
+const sortedProjects = renovationProjects.map(project => ({
   ...project,
-  images: sortRenovationPhotos(project.images),
+  images: sortPhotos(project.images),
 }));
 
 export default function Renovation() {
@@ -71,9 +63,9 @@ export default function Renovation() {
         </div>
       </section>
 
-      {/* Project carousels — sorted before → after */}
+      {/* Project carousels — before photos first, then after */}
       <div className="bg-brand-bg dark:bg-brand-dark-bg">
-        {sortedRenovationProjects.map((project, i) => (
+        {sortedProjects.map((project, i) => (
           <ProjectCarousel key={project.id} project={project} index={i} />
         ))}
       </div>
