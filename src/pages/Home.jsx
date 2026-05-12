@@ -143,7 +143,7 @@ export default function Home() {
               View Our Work
             </Link>
             <Link to="/contact" className="btn-outline">
-              Get a Free Quote
+              Get a Free Consultation
             </Link>
           </motion.div>
         </div>
